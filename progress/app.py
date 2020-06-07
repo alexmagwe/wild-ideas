@@ -13,6 +13,9 @@ app=Flask(__name__)
 app.config.from_object(configs['production'])
 db=SQLAlchemy(app)
 admin=Admin(app)
+from flask_sslify import SSLify
+if app.config['SSL_REDIRECT']:
+    sslify=SSLify(app)
 socketio=SocketIO(app)
 if not app.debug and not app.testing:
     if app.config['LOG_TO_STDOUT']:
