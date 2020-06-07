@@ -1,4 +1,4 @@
-var socket = io.connect('http://' + document.domain + ':' + location.port);
+var socket = io.connect('https://' + document.domain + ':' + location.port);
 socket.on('connect', () => {
 	let data={'data':'query_lessons'};
     socket.emit('request',data);
