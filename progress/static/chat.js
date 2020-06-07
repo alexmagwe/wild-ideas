@@ -1,4 +1,4 @@
-var socket = io.connect('https://' + document.domain + ':' + location.port);
+var socket = io.connect('https://progress-log.herokuapp.com/');
 socket.on('connect', () => {
 	let data={'data':'query_lessons'};
     socket.emit('request',data);
