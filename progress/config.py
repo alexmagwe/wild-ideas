@@ -10,6 +10,8 @@ class Development:
 class Production(object):
     SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
     FLASK_APP='run.py'
+    SQLALCHEMY_COMMIT_ON_TEARDOWN=True
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
     SSL_REDIRECT=True
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
 configs={'development':Development,'production':Production}
