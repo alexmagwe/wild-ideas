@@ -78,7 +78,9 @@ def handle_custom_event(data,methods=['GET','POST']):
 def success(data):
     lesson=Lessons(date=data.get('date'),lesson=data.get('lesson'))
     db.session.add(lesson)
-    db.session.commit()
-    
+    try:
+        db.session.commit()
+    except:
+        db.session.rollback()
     
 
