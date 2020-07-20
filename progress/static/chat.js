@@ -1,4 +1,5 @@
-var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + location.host : 'http://' + location.host + ':' + location.port);
+// var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + location.host : 'http://' + location.host + ':' + location.port);
+var socket = io.connect('http://' + document.domain + ':' + location.port);
 
 socket.on('connect', () => {
     let data = { 'data': 'query_lessons' };

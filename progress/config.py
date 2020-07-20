@@ -9,7 +9,7 @@ class Development:
     FLASK_APP='app.py'
     SSL_REDIRECT=True
 class Production(object):
-    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URI')
     FLASK_APP='run.py'
     SQLALCHEMY_COMMIT_ON_TEARDOWN=True
     SQLALCHEMY_TRACK_MODIFICATIONS=False
