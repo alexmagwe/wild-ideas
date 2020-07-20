@@ -16,7 +16,7 @@ admin=Admin(app)
 from flask_sslify import SSLify
 if app.config['SSL_REDIRECT']:
     sslify=SSLify(app)
-socketio=SocketIO(app)
+socketio=SocketIO(sslify)
 if not app.debug and not app.testing:
     if app.config['LOG_TO_STDOUT']:
         stream_handler = logging.StreamHandler()
