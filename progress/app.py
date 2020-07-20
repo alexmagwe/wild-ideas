@@ -60,6 +60,9 @@ def get_time():
     yr,mnth,day=date.year,date.month,date.day
     date=f"{day}/{mnth}/{yr}"
     return date
+@socketio.on('/connect')
+def connection():
+    
 @socketio.on('request')
 def handle_custom_event(data,methods=['GET','POST']):
     if data.get('data')=='query_lessons':

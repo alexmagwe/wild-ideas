@@ -7,6 +7,7 @@ class Development:
     SQLALCHEMY_COMMIT_ON_TEARDOWN=True
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     FLASK_APP='app.py'
+    SSL_REDIRECT=True
 class Production(object):
     SQLALCHEMY_DATABASE_URI=os.environ.get('DATABASE_URL')
     FLASK_APP='run.py'
