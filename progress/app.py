@@ -4,7 +4,7 @@ import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
-from .config import configs
+from progress.config import configs
 from flask_admin import Admin
 from flask_sslify import SSLify
 from flask_admin.contrib.sqla import ModelView
