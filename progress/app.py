@@ -61,7 +61,7 @@ def get_time():
     date=f"{day}/{mnth}/{yr}"
     return date
 
-@socket.io.on('connect')
+@socketio.on('connect')
 def new_connection(msg):
     socketio.emit('connected',msg)
 @socketio.on('request')
