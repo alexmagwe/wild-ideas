@@ -1,19 +1,20 @@
 from flask import Flask,render_template,url_for,request,jsonify
 import os
-
+from flask_script import Manager
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_socketio import SocketIO
 from flask_sqlalchemy import SQLAlchemy
-from .config import configs
+from config import configs
 from flask_admin import Admin
+from flask_sslify import SSLify
 from flask_admin.contrib.sqla import ModelView
 from datetime import datetime
 app=Flask(__name__)
 app.config.from_object(configs['production'])
 db=SQLAlchemy(app)
 admin=Admin(app)
-from flask_sslify import SSLify
+
 if app.config['SSL_REDIRECT']:
     sslify=SSLify(app)
 socketio=SocketIO(app)
@@ -37,6 +38,7 @@ if not app.debug and not app.testing:
     app.logger.info('Progress')
 
 class Lessons(db.Model):
+    __tablename__='lessons'
     id=db.Column(db.Integer,primary_key=True,index=True)
     lesson=db.Column(db.String(100),nullable=False)
     date=db.Column(db.String(10),index=True,nullable=False)
