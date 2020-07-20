@@ -16,7 +16,7 @@ admin=Admin(app)
 from flask_sslify import SSLify
 if app.config['SSL_REDIRECT']:
     sslify=SSLify(app)
-socketio=SocketIO(sslify)
+socketio=SocketIO(app)
 if not app.debug and not app.testing:
     if app.config['LOG_TO_STDOUT']:
         stream_handler = logging.StreamHandler()
@@ -61,7 +61,9 @@ def get_time():
     date=f"{day}/{mnth}/{yr}"
     return date
 
-    
+@socket.io.on('connect')
+def new_connection(msg):
+    socketio.emit('connected',msg)
 @socketio.on('request')
 def handle_custom_event(data,methods=['GET','POST']):
     if data.get('data')=='query_lessons':

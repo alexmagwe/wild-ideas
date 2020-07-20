@@ -1,6 +1,15 @@
 var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + document.location + '/' : 'http://' + document.location + ':' + location.port);
 var socket = io()
 socket.on('connect', () => {
+    let msg = document.createElement('span')
+    msg.style.position = "absolute"
+    msg.style.top = '0'
+    msg.style.left = '0'
+    msg.style.width = '100%'
+    msg.style.color = '#111'
+    let body = document.querySelector('body')
+    body.appendChild(msg)
+
     let data = { 'data': 'query_lessons' };
     socket.emit('request', data);
     $('form').submit(event => {
@@ -13,7 +22,6 @@ socket.on('connect', () => {
 
     })
 })
-
 
 socket.on('receive', (msg) => {
     if (msg.lessons !== undefined && msg.lessons.length > 1) {
