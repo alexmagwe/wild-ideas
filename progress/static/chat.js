@@ -1,4 +1,4 @@
-var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + document.location + '/' : 'http://' + document.location + ':' + location.port);
+var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + document.domain + '/' : 'http://' + document.domain + ':' + location.port);
 var socket = io()
 socket.on('connect', () => {
     let msg = document.createElement('span')
