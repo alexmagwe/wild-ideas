@@ -1,5 +1,5 @@
 var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + document.domain + '/' : 'http://' + document.domain + ':' + location.port);
-var socket = io()
+// var socket = io()
 socket.on('connect', () => {
     let msg = document.createElement('span')
     msg.style.position = "absolute"
