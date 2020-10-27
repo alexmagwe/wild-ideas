@@ -1,0 +1,52 @@
+.navbar{
+    display:flex;
+    width:90%;
+    height:4em;
+    margin:auto;
+justify-content:flex-start;
+color:#111;
+    align-items: center;
+
+}
+.navbar .logo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1.5em;
+    font-weight:600;
+}
+.nav-links{
+    width:20%;
+    display: flex;
+    /* border:1px solid red; */
+    justify-content:space-evenly;
+    
+}
+.nav-link{
+    color:#111;
+
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s ease-in-out;
+
+}
+.nav-link:hover{
+    color:purple;
+    
+}
+@media screen and (max-width:600px){
+
+    .nav-links{
+    width:60%;
+    justify-content:space-between;
+    
+}
+
+}
+@media screen and (max-width:400px){
+
+    .nav-links{
+    width:90%;
+    justify-content:space-between;
+    
+}
+
+}

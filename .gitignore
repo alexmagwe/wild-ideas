@@ -4,3 +4,5 @@ progress.sqlite
 progress/__pycache__
 .vscode/
 env.txt
+.flaskenv
+.env

@@ -1,0 +1,30 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet">
+        <link href="{{url_for('static',filename='navbar.css')}}" rel="stylesheet">
+
+         <title>WildIdeas</title>
+ </head>
+ <body>
+        <nav class='navbar'>
+            <div class='nav-links'>
+                <a class='nav-link' href="{{url_for('home')}}"><span>Home</span></a>
+               <a class='nav-link' href="#"><span>New</span></a>
+          </div>
+      </nav>
+     <div class='form-container'>
+         <form id='add-form'>
+             <input type='text' required name='Title' placeholder='title' id='title-input'>
+             <label for='desc'>Description</label>
+             <textarea name='desc' id='desc'></textarea>
+             <button class='button' type='submit'> add</button>
+         </form>
+    </div>
+    <script src="{{url_for('static',filename='chat.js')}}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+ </body>
+ </html>

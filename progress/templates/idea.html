@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='navbar.css')}}" rel="stylesheet">
+    <title>Wild Ideas</title>
+</head>
+<body>
+        <nav class='navbar'>
+            <div class='nav-links'>
+                <a class='nav-link' href="{{url_for('home')}}"><span>Home</span></a>
+               <a class='nav-link' href="{{url_for('add_ideas')}}"><span>New</span></a>
+          </div>
+      </nav>
+      <div id='idea-container'>
+    <h2 class='idea-title'>{{idea.title}}</h2>
+    <p class='idea-p'>{{idea.description}}</p>
+    <span class='date'>{{idea.date}}</span>
+      </div>
+</body>
+</html>

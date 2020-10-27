@@ -1,44 +1,58 @@
-var socket = io.connect(window.location.protocol == 'https:' ? 'wss://' + document.domain + '/' : 'http://' + document.domain + ':' + location.port);
-// var socket = io()
-socket.on('connect', () => {
-    let msg = document.createElement('span')
-    msg.style.position = "absolute"
-    msg.style.top = '0'
-    msg.style.left = '0'
-    msg.style.width = '100%'
-    msg.style.color = '#111'
-    let body = document.querySelector('body')
-    body.appendChild(msg)
-
-    let data = { 'data': 'query_lessons' };
-    socket.emit('request', data);
-    $('form').submit(event => {
-        event.preventDefault();
-        let question = $('#question').val()
-        socket.emit('request', {
-            'lesson': question
+window.addEventListener('DOMContentLoaded',()=>{
+    if (window.location.pathname==='/')
+    {fetch('/ideas')
+        .then(resp=>resp.json())
+        .then(data=>{    
+            data.map(idea=>
+            display(idea))
         })
-        $('#question').val("").focus();
-
-    })
-})
-
-socket.on('receive', (msg) => {
-    if (msg.lessons !== undefined && msg.lessons.length > 1) {
-        msg.lessons.forEach(display);
-    } else if (typeof msg.lesson !== undefined) {
-        display(msg);
+        .catch(err=>alert(err))    
     }
-})
+$('#add-form').submit(event => {
+        console.log('submitted form')
+        event.preventDefault();
+        let title= $('#title-input').val()
+        let desc=$('#desc').val()
+        let payload={title:title,
+                 description:desc
+         }
+        fetch('/add/idea',{
+            method:'POST',
+            mode:'cors',
+            headers:{
+            'Content-Type':'application/json'
+            },
+            body:JSON.stringify(payload) 
+        })
+        .then(resp=>resp.json())
+        .then(data=>{console.log(data)
+            window.location.assign('/')
+            alert(resp.data)
+            })
+        .catch(err=>{alert(err)})
+    })
+
+
 const display = (data, index) => {
-    let container = $('#lesson-container')
-    let lesson = document.createElement('div');
+    let container = $('#ideas-container')
+    let idea= document.createElement('div');
+    let title=document.createElement('h3')
+    let preview_desc=document.createElement('p')
     let date = document.createElement('span')
+    let link=document.createElement('a')
+    link.href=`/idea/${data.id}`
     date.innerHTML = data.date
-    lesson.innerHTML = data.lesson;
-    lesson.append(date);
-    lesson.className += 'lesson';
-    container.append(lesson);
+    title.innerHTML = data.title
+    preview_desc.innerHTML = data.description.slice(0,20)
+    link.appendChild(title)
+    idea.appendChild(link)
+    idea.appendChild(preview_desc)
+    idea.append(date);
+    date.className +='date';
+    idea.className += 'idea';
+
+    container.append(idea);
 
 
 }
+})
