@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+a{
+    text-decoration: none;
+}
 
 @font-face {
     font-family: fira;
@@ -25,11 +28,6 @@
 }
 
 @font-face {
-    font-family: openSansreg;
-    src: url('fonts/OpenSans-Regular.ttf')
-}
-
-@font-face {
     font-family: openSansLight;
     src: url('fonts/OpenSans-Light.ttf')
 }
@@ -43,6 +41,7 @@ body {
     margin: auto;
     transition: all 0.3s;
     height: 40px;
+    background-color:rgb(24, 110, 191);
     border-radius: 10px;
     border-color: silver;
 }
@@ -55,10 +54,10 @@ body {
 #title {
     width: 100%;
     text-align: center;
-    font-family: fira4;
+    font-family: sans-serif;
 }
 
-#form {
+.form-container form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,33 +66,54 @@ body {
     margin: auto;
     padding: 10px;
 }
-
-#question {
-    width: 100%;
-    margin: auto;
-    font-family: openSansreg;
-    font-size: 14px;
-    margin-bottom: 1em;
-    padding: 5px;
+.form-container textarea{
+    margin:1em 0;
+    width:100%;
+    min-height:200px;
+    resize: vertical;
 }
 
-#lesson-container{
+#title-input{
+    width:70%;
+    margin:1em 0;
+    padding:5px;
+    border:none;
+    border-bottom: 2px solid #111;
+
+}
+#ideas-container{
 	width:100%;
     padding: 10px;
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    grid-column-gap:1em;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
 }
+.idea h2{
+    font-size:24px;
+    font-family:Verdana sans-serif;
+    font-weight: bold;
+}
+.idea{
+    padding:10px;
+    width:300px;
 
-.lesson{
-font-family:inherit;
-padding:10px;}
-#lesson-container>div {
-    font-family: oS-Bold;
-    font-size: 22px;
+}
+#ideas-container>div {
     transition: all 0.3s;
 }
-.lesson span{
+/* single idea page */
+#idea-container{
+    width:100%;
+    padding:2em;
+    /* min-height:100vh; */
+}
+.idea-p{
+    margin:1em 0;
+    font-family:sans-serif;
+
+}
+.date{
 display:block;
 font-size:12px;
 color:darkblue;
@@ -101,14 +121,17 @@ margin-top:5px;
 
 }
 @media screen and (max-width:600px) {
-    #form {
-        width: 100%;
-    }
-    #question {
-        font-family: openSansreg;
-        font-size: 14px;
-        word-wrap: break-word;
-        margin-bottom: 1em;
-        padding: 5px;
-    }
+
+#idea-container{
+ padding:1em;
+}
+.idea{
+    width:100%;
+}
+.form-container form{
+    width:100%;
+}
+#title-input{
+    width:100%;
+}
 }

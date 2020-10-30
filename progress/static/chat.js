@@ -1,36 +1,58 @@
-var socket = io.connect('http://' + document.domain + ':' + location.port);
-socket.on('connect', () => {
-	let data={'data':'query_lessons'};
-    socket.emit('request',data);
-    $('form').submit(event => {
-        event.preventDefault();
-        let question = $('#question').val()
-        socket.emit('request', 
-	{'lesson': question
+window.addEventListener('DOMContentLoaded',()=>{
+    if (window.location.pathname==='/')
+    {fetch('/ideas')
+        .then(resp=>resp.json())
+        .then(data=>{    
+            data.map(idea=>
+            display(idea))
         })
-        $('#question').val("").focus();
-
+        .catch(err=>alert(err))    
+    }
+$('#add-form').submit(event => {
+        console.log('submitted form')
+        event.preventDefault();
+        let title= $('#title-input').val()
+        let desc=$('#desc').val()
+        let payload={title:title,
+                 description:desc
+         }
+        fetch('/add/idea',{
+            method:'POST',
+            mode:'cors',
+            headers:{
+            'Content-Type':'application/json'
+            },
+            body:JSON.stringify(payload) 
+        })
+        .then(resp=>resp.json())
+        .then(data=>{console.log(data)
+            window.location.assign('/')
+            alert(resp.data)
+            })
+        .catch(err=>{alert(err)})
     })
-})
 
 
-socket.on('receive', (msg) => {
-	if ( msg.lessons !==undefined && msg.lessons.length>1)
-	{msg.lessons.forEach(display);
-	}
-	else if (typeof msg.lesson !== undefined ) {
-display(msg);
-    }}
-)
-const display=(data,index)=>{
-    let container=$('#lesson-container')
-        let lesson= document.createElement('div');
-	let date=document.createElement('span')
-		date.innerHTML=data.date
-        lesson.innerHTML = data.lesson;
-		lesson.append(date);
-	lesson.className+='lesson';
-	container.append(lesson);
+const display = (data, index) => {
+    let container = $('#ideas-container')
+    let idea= document.createElement('div');
+    let title=document.createElement('h3')
+    let preview_desc=document.createElement('p')
+    let date = document.createElement('span')
+    let link=document.createElement('a')
+    link.href=`/idea/${data.id}`
+    date.innerHTML = data.date
+    title.innerHTML = data.title
+    preview_desc.innerHTML = data.description.slice(0,20)
+    link.appendChild(title)
+    idea.appendChild(link)
+    idea.appendChild(preview_desc)
+    idea.append(date);
+    date.className +='date';
+    idea.className += 'idea';
+
+    container.append(idea);
 
 
 }
+})
