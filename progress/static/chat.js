@@ -8,15 +8,42 @@ window.addEventListener('DOMContentLoaded',()=>{
         })
         .catch(err=>alert(err))    
     }
-$('#add-form').submit(event => {
-        console.log('submitted form')
-        event.preventDefault();
-        let title= $('#title-input').val()
-        let desc=$('#desc').val()
-        let payload={title:title,
+       
+        $('#add-form').submit(e =>{
+            e.preventDefault()
+            let title= $('#title-input').val()
+            let desc=$('#desc').val()
+            let payload={title:title,
                  description:desc
-         }
-        fetch('/add/idea',{
+            }
+            hermes('add',payload)
+        })
+
+        $('#edit-form').submit(e =>{
+            e.preventDefault()
+            let id=window.location.pathname.split('/').pop()
+            console.log(id)
+            let title= $('#edit-title-input').val()
+            let desc=$('#edit-desc').val()
+            let payload={title:title,
+                 description:desc
+            }
+            hermes('edit',payload,id)
+        })
+
+    function hermes(action,payload,id=''){
+        let url;
+        switch(action){
+            case 'edit':
+                url=`/edit/${id}`
+                break;
+            case 'add':
+                url='/add/idea';
+                break;
+            default:
+                url=''
+        }
+        fetch(url,{
             method:'POST',
             mode:'cors',
             headers:{
@@ -25,12 +52,11 @@ $('#add-form').submit(event => {
             body:JSON.stringify(payload) 
         })
         .then(resp=>resp.json())
-        .then(data=>{console.log(data)
-            window.location.assign('/')
+        .then(data=>{console.log('DATA:',data)
             alert(data.message)
             })
         .catch(err=>{alert(err)})
-    })
+    }
 
 
 const display = (data, index) => {

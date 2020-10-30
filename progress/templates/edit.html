@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{url_for('static',filename='styles.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='navbar.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class='navbar'>
+        <div class='nav-links'>
+            <a class='nav-link' href="{{url_for('home')}}">Home</a>
+           <a class='nav-link' href="{{url_for('add_ideas')}}">New</a>
+      </div> 
+ </nav>
+    <h4 id='title'>Edit</h4>
+ <div class='form-container'>
+         <form id='edit-form'>
+             <input type='text' required name='Title' value="{{idea.title}}" id='edit-title-input'>
+             <label for='desc'>Description</label>
+             <textarea name='desc' id='edit-desc'>{{idea.description}}</textarea>
+             <button class='button' type='submit'> update</button>
+         </form>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{{url_for('static',filename='chat.js')}}">
+</script>
+
+</html>

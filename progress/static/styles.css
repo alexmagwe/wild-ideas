@@ -73,7 +73,7 @@ body {
     resize: vertical;
 }
 
-#title-input{
+.form-container input{
     width:70%;
     margin:1em 0;
     padding:5px;
@@ -131,7 +131,7 @@ margin-top:5px;
 .form-container form{
     width:100%;
 }
-#title-input{
+.form-container input{
     width:100%;
 }
 }

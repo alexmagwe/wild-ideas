@@ -17,7 +17,9 @@
       <div id='idea-container'>
     <h2 class='idea-title'>{{idea.title}}</h2>
     <p class='idea-p'>{{idea.description}}</p>
-    <span class='date'>{{idea.date}}</span>
-      </div>
+    <span class='date'>{{idea.date}}
+    <a href="{{url_for('edit',id=idea.id)}}">edit</a>
+     </span>
+     </div>
 </body>
 </html>

@@ -66,7 +66,6 @@ def add_ideas():
 
 @app.route('/idea/<int:id>',methods=['GET'])
 def idea(id):
-    print(id)   
     idea=Ideas.query.get(id) 
     return render_template('idea.html',idea=idea)
 
@@ -80,7 +79,6 @@ def get_time():
 def ideas():
     ideas=Ideas.query.all()
     resp=jsonify([idea.to_json() for idea in ideas])
-    print('data:',resp)
     return resp,200
 
 @app.route('/add/idea',methods=['POST'])
@@ -99,5 +97,21 @@ def add():
             db.session.rollback()
             return {'error':sys.exc_info()[0]},500
     return {'error':'missing data'},400
-        
+@app.route('/edit/<int:id>',methods=['GET','POST'])
+def edit(id):
+    post=Ideas.query.get(id)
+    if request.method=='POST':
+        data=request.json
+        title=data.get('title')
+        description=data.get('description')
+        if title and description:
+            post.title=title
+            post.description=description
+            try:
+                db.session.commit()
+                return {'message':'updated succesfully'},200
+            except:
+                return {'error':sys.exc_info()[0]},500
+    return render_template('edit.html',idea=post)
+
 
