@@ -94,7 +94,7 @@ def add():
         db.session.add(idea)
         try:
             db.session.commit()
-            return {'success':'added succesfully'},200
+            return {'message':'added succesfully'},200
         except:
             db.session.rollback()
             return {'error':sys.exc_info()[0]},500

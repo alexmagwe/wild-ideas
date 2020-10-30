@@ -27,7 +27,7 @@ $('#add-form').submit(event => {
         .then(resp=>resp.json())
         .then(data=>{console.log(data)
             window.location.assign('/')
-            alert(resp.data)
+            alert(data.message)
             })
         .catch(err=>{alert(err)})
     })
