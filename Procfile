@@ -1,1 +1,2 @@
-web: gunicorn --worker-class eventlet -w 1 wsgi:app
+web: gunicorn wsgi:app
+upgrade: python manager.py db upgrade
