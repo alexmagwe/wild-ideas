@@ -15,7 +15,8 @@ class Development:
     SSL_REDIRECT=True
 class Production(object):
     SQLALCHEMY_DATABASE_URI=environ.get('DATABASE_URL')
-    FLASK_APP='run.py'
+    FLASK_APP='wsgi.py'
+    SECRET_KEY=environ.get('SECRET_KEY')
     SQLALCHEMY_COMMIT_ON_TEARDOWN=True
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     SSL_REDIRECT=True

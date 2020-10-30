@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 from flask_admin.contrib.sqla import ModelView
 from datetime import datetime
 app=Flask(__name__)
-app.config.from_object(configs['development'])
+app.config.from_object(configs['production'])
 db=SQLAlchemy(app)
 migrate = Migrate(app, db)
 admin=Admin(app)
