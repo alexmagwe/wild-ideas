@@ -114,4 +114,13 @@ def edit(id):
                 return {'error':sys.exc_info()[0]},500
     return render_template('edit.html',idea=post)
 
-
+@app.route('/delete/<int:id>',methods=['DELETE'])
+def delete(id):
+    post=Ideas.query.get(id)
+    db.session.remove(post)
+    try:
+        db.session.commit()
+        return {'message':'deleted succesfully'},200
+    except:
+        return {'error':sys.exc_info()[0]},500
+ 
