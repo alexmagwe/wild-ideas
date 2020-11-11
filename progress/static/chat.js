@@ -1,4 +1,6 @@
+	    
 window.addEventListener('DOMContentLoaded',()=>{
+	    console.log('LOADED')
     if (window.location.pathname==='/')
     {fetch('/ideas')
         .then(resp=>resp.json())
@@ -16,7 +18,10 @@ window.addEventListener('DOMContentLoaded',()=>{
             let payload={title:title,
                  description:desc
             }
-            hermes('add',payload)
+		let action={action:'add',method:'POST'
+			}
+            hermes(action,payload,id)
+
         })
 
         $('#edit-form').submit(e =>{
@@ -28,23 +33,40 @@ window.addEventListener('DOMContentLoaded',()=>{
             let payload={title:title,
                  description:desc
             }
-            hermes('edit',payload,id)
+		let action={action:'edit',method:'PATCH'
+			}
+            hermes(action,payload,id)
         })
+	$('#delete-key').click(()=>{
+		console.log('clicked')
+	let res=confirm('are you sure')
+		if (res){
+        let id=window.location.pathname.split('/').pop()
+		let action={action:'delete',method:'DELETE'
+			}
+            hermes(action,'',id)
+		}	
+	})
 
-    function hermes(action,payload,id=''){
+    function hermes(actions,payload,id=''){
         let url;
-        switch(action){
+			let {action,method}={...actions}
+			switch(action){
             case 'edit':
                 url=`/edit/${id}`
                 break;
             case 'add':
                 url='/add/idea';
-                break;
-            default:
-                url=''
+               break;
+	case 'delete':
+		console.log('case delete')
+		url=`/delete/${id}`
+		break;
+	default:
+		url=''
         }
         fetch(url,{
-            method:'POST',
+			method:method,
             mode:'cors',
             headers:{
             'Content-Type':'application/json'

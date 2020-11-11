@@ -6,7 +6,9 @@
 a{
     text-decoration: none;
 }
-
+#delete-key{
+cursor:pointer;
+}
 @font-face {
     font-family: fira;
     src: url('fonts/firasans/FiraSans-Bold.otf')

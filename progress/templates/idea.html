@@ -19,8 +19,11 @@
     <p class='idea-p'>{{idea.description}}</p>
     <span class='date'>{{idea.date}}
     <a href="{{url_for('edit',id=idea.id)}}">edit</a>
-    <a href="{{url_for('delete',id=idea.id)}}">delete</a>
+    <a id='delete-key'>delete</a>
      </span>
      </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{{url_for('static',filename='chat.js')}}">
+</script>
 </body>
 </html>

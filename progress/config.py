@@ -14,6 +14,7 @@ class Development:
     DEBUG=True
     SSL_REDIRECT=True
 class Production(object):
+    SECRET_KEY='7ca1b230ca5bcda875a3c5a1eb2babc20233226775f7619c904e8902a3a36e22'
     SQLALCHEMY_DATABASE_URI=environ.get('DATABASE_URL')
     FLASK_APP='wsgi.py'
     SECRET_KEY=environ.get('SECRET_KEY')

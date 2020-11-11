@@ -1,5 +1,5 @@
 from flask import Flask,render_template,url_for,request,jsonify
-import os
+import os,datetime
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask_sqlalchemy import SQLAlchemy
@@ -41,7 +41,7 @@ class Ideas(db.Model):
     id=db.Column(db.Integer,primary_key=True,index=True)
     title =db.Column(db.String(100),nullable=False,index=True)
     description=db.Column(db.Text(),nullable=False)
-    date=db.Column(db.String(10),index=True,nullable=False)
+    date=db.Column(db.String(30),index=True,default=datetime.utcnow)
     def __repr__(self):
         return f"idea:{self.idea},date:{self.date}"
     def to_json(self):
@@ -97,10 +97,10 @@ def add():
             db.session.rollback()
             return {'error':sys.exc_info()[0]},500
     return {'error':'missing data'},400
-@app.route('/edit/<int:id>',methods=['GET','POST'])
+@app.route('/edit/<int:id>',methods=['GET','PATCH'])
 def edit(id):
     post=Ideas.query.get(id)
-    if request.method=='POST':
+    if request.method=='PATCH':
         data=request.json
         title=data.get('title')
         description=data.get('description')
@@ -117,7 +117,7 @@ def edit(id):
 @app.route('/delete/<int:id>',methods=['DELETE'])
 def delete(id):
     post=Ideas.query.get(id)
-    db.session.remove(post)
+    db.session.delete(post)
     try:
         db.session.commit()
         return {'message':'deleted succesfully'},200
