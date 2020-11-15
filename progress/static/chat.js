@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded',()=>{
             }
 		let action={action:'add',method:'POST'
 			}
-            hermes(action,payload,id)
+            hermes(action,payload)
 
         })
 
